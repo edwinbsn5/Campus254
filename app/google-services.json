@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "993554082331",
+    "project_id": "campus254-c1a74",
+    "storage_bucket": "campus254-c1a74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993554082331:android:3c05878c99bc2436a366be",
+        "android_client_info": {
+          "package_name": "campus254.hub254.network"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "993554082331-5fktnq54lgos3725vk5houb95mu2leq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcJMpgo2OZ-U0-4p3e-Cf1xAiLS-VKbyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "993554082331-5fktnq54lgos3725vk5houb95mu2leq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
