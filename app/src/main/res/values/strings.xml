@@ -10,7 +10,6 @@
     <string name="app_site" translatable="false">https://campus254.hub254.com</string>
 
     <string name="app_lang_code">en</string>
-
     <!-- Facebook App Id -->
 
     <string name="facebook_app_id" translatable="false">465456456456456</string>
@@ -1039,8 +1038,8 @@
     <string name="settings_night_mode_label">Night Mode</string>
     <string name="settings_night_mode_summary">You can switch app theme</string>
 
-    <string name="label_feed_mode_0">Global Publication Flow</string>
-    <string name="label_feed_mode_1">Friends and Community Updates</string>
+    <string name="label_feed_mode_0">Global NewsFeed</string>
+    <string name="label_feed_mode_1">Friends &amp; Groups NewsFeed</string>
 
     <!--  For version 6.3  -->
 
