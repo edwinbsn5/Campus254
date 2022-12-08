@@ -3,6 +3,7 @@ package campus254.hub254.network;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,6 +12,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.ThumbnailUtils;
@@ -26,10 +29,13 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+
+import com.google.android.exoplayer2.util.ColorParser;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
@@ -75,6 +81,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.mikhaellopez.circularimageview.CircularImageView;
+
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.MultipartBuilder;
@@ -118,6 +125,8 @@ import campus254.hub254.network.util.Api;
 import campus254.hub254.network.util.CustomRequest;
 import campus254.hub254.network.util.Helper;
 
+
+
 public class NewItemFragment extends Fragment implements Constants {
 
     private static final int BUFFER_SIZE = 1024 * 2;
@@ -132,6 +141,7 @@ public class NewItemFragment extends Fragment implements Constants {
     public static final int RESULT_OK = -1;
 
     private static final int ITEM_FEELINGS = 1;
+    private String mDefaultColor="";
 
     private FusedLocationProviderClient mFusedLocationClient;
     protected Location mLastLocation;
@@ -162,6 +172,7 @@ public class NewItemFragment extends Fragment implements Constants {
     private ImageView mAccessModeIcon;
     private TextView mAccessModeTitle;
     private LinearLayout mAccessModeLayout;
+    private ConstraintLayout consHeight;
 
     private ImageView mLocationIcon;
     private TextView mLocationTitle;
@@ -262,6 +273,7 @@ public class NewItemFragment extends Fragment implements Constants {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -498,6 +510,7 @@ public class NewItemFragment extends Fragment implements Constants {
 
         //
 
+
         mOpenBottomSheet = (MaterialRippleLayout) rootView.findViewById(R.id.open_bottom_sheet_button);
 
         mOpenBottomSheet.setOnClickListener(new View.OnClickListener() {
@@ -577,6 +590,79 @@ public class NewItemFragment extends Fragment implements Constants {
         });
 
         //
+        rootView.findViewById(R.id.color_pick).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(rootView.findViewById(R.id.constraintLayout).getVisibility() == View.GONE){
+                    rootView.findViewById(R.id.constraintLayout).setVisibility(View.VISIBLE);
+                    hideKeyboardN();
+
+                    if (mDefaultColor == "") {
+
+                        mDefaultColor = "BLACK";
+                        rootView.findViewById(R.id.constraintLayout).setVisibility(View.VISIBLE);
+                        mPostEdit.setBackgroundColor(Color.parseColor("#000000"));
+                        mPostEdit.setHeight(500);
+                        mPostEdit.setGravity(Gravity.CENTER);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            mPostEdit.setTextColor( mPostEdit.getContext().getColor(R.color.white));
+                        }
+
+                    }
+                    if(mPostEdit.getText().toString().equals("")){
+                        mPostEdit.setHint("What's on your mind?");
+                        mPostEdit.setHintTextColor(Color.WHITE);
+                    }
+
+                }else{
+                    rootView.findViewById(R.id.constraintLayout).setVisibility(View.GONE);
+                }
+            }
+        });
+
+
+        rootView.findViewById(R.id.g_color).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDefaultColor = "GREEN";
+                rootView.findViewById(R.id.constraintLayout).setVisibility(View.GONE);
+                mPostEdit.setBackgroundColor(Color.parseColor("#008c51"));
+                mPostEdit.setHeight(500);
+                mPostEdit.setGravity(Gravity.CENTER);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mPostEdit.setTextColor( mPostEdit.getContext().getColor(R.color.white));
+                }
+            }
+        });
+        rootView.findViewById(R.id.r_color).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDefaultColor = "RED";
+                rootView.findViewById(R.id.constraintLayout).setVisibility(View.GONE);
+                mPostEdit.setBackgroundColor(Color.parseColor("#922529"));
+                mPostEdit.setHeight(500);
+                mPostEdit.setGravity(Gravity.CENTER);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mPostEdit.setTextColor( mPostEdit.getContext().getColor(R.color.white));
+                }
+            }
+        });
+
+        rootView.findViewById(R.id.b_color).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDefaultColor = "BLACK";
+                rootView.findViewById(R.id.constraintLayout).setVisibility(View.GONE);
+                mPostEdit.setBackgroundColor(Color.parseColor("#000000"));
+                mPostEdit.setHeight(500);
+                mPostEdit.setGravity(Gravity.CENTER);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mPostEdit.setTextColor( mPostEdit.getContext().getColor(R.color.white));
+                }
+            }
+        });
+
+
 
         mAccessModeIcon = (ImageView) rootView.findViewById(R.id.access_mode_image);
         mAccessModeTitle = (TextView) rootView.findViewById(R.id.access_mode_label);
@@ -760,6 +846,19 @@ public class NewItemFragment extends Fragment implements Constants {
 
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    private void hideKeyboardN() {
+
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            //Find the currently focused view, so we can grab the correct window token from it.
+            View view = getActivity().getCurrentFocus();
+            //If no view currently has focus, create a new one, just so we can grab a window token from it
+            if (view == null) {
+                view = new View(getActivity());
+            }
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
     }
 
     private void updateTitle() {
@@ -1540,8 +1639,10 @@ public class NewItemFragment extends Fragment implements Constants {
                     @Override
                     public void onResponse(JSONObject response) {
 
+
                         try {
 
+                            Log.d("stringalok",response.toString());
                             if (!response.getBoolean("error")) {
 
 
@@ -1552,6 +1653,7 @@ public class NewItemFragment extends Fragment implements Constants {
                             e.printStackTrace();
 
                         } finally {
+
 
                             sendPostSuccess();
                         }
@@ -1574,14 +1676,17 @@ public class NewItemFragment extends Fragment implements Constants {
                 params.put("groupId", Long.toString(group_id));
                 params.put("rePostId", Long.toString(item.getRePostId()));
                 params.put("postMode", Integer.toString(item.getAccessMode()));
-                params.put("postText", item.getPost());
+                params.put("postText", ""+item.getPost()+":"+mDefaultColor+":");
+                Log.d("testAlok", String.valueOf(mDefaultColor));
                 params.put("postImg", item.getImgUrl());
                 params.put("postArea", item.getArea());
                 params.put("postCountry", item.getCountry());
                 params.put("postCity", item.getCity());
                 params.put("postLat", Double.toString(item.getLat()));
                 params.put("postLng", Double.toString(item.getLng()));
-
+//                params.put("postColor","black");
+//                params.put("postColorFormate","left");
+//
                 params.put("feeling", Integer.toString(item.getFeeling()));
 
                 if (item.getMediaList().size() != 0) {

@@ -9,6 +9,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 
 import androidx.core.widget.NestedScrollView;
@@ -16,11 +18,13 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -62,10 +66,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import github.ankushsachdeva.emojicon.EmojiconEditText;
 import github.ankushsachdeva.emojicon.EmojiconTextView;
@@ -139,7 +145,7 @@ public class AdvancedItemListAdapter extends RecyclerView.Adapter<AdvancedItemLi
         public ResizableImageView mItemImg;
         public ImageView mVideoImg;
         public RelativeLayout mVideoLayout, mImageLayout;
-        public LinearLayout mImagesCounterLayout;
+        public LinearLayout mImagesCounterLayout,cardContainer;
         public TextView mImagesCounterLabel;
         public ImageView mItemLikeImg, mItemCommentImg, mItemRepostImg;
         public TextView mItemRepostsCount;
@@ -236,6 +242,7 @@ public class AdvancedItemListAdapter extends RecyclerView.Adapter<AdvancedItemLi
                 mVideoLayout = (RelativeLayout) v.findViewById(R.id.video_layout);
                 mImageLayout = (RelativeLayout) v.findViewById(R.id.image_layout);
                 mImagesCounterLayout = (LinearLayout) v.findViewById(R.id.images_counter_layout);
+                cardContainer = (LinearLayout) v.findViewById(R.id.cardContainer);
 
                 mImagesCounterLabel = (TextView) v.findViewById(R.id.images_counter_label);
 
@@ -947,14 +954,65 @@ public class AdvancedItemListAdapter extends RecyclerView.Adapter<AdvancedItemLi
 
             if (p.getPost().length() != 0) {
 
+
+
+
                 holder.mItemDescription.setVisibility(View.VISIBLE);
                 holder.mItemDescription.setText(p.getPost().replaceAll("<br>", "\n"));
+
+
+
+                try{
+
+                    String currentString = p.getPost();
+                    String[] separated = currentString.split(":");
+//                String s = separated[0];// this will contain "Fruit"
+//                separated[1]; // this will contain " they taste good"
+                    Log.d("colorCodeAlok1",separated[0]);
+                    Log.d("colorCodeAlok0",separated[1]);
+
+
+                    String value = separated[1];
+                    if("RED".equals(value)){
+                        holder.mItemDescription.setBackgroundColor(Color.parseColor("#922529"));
+                        holder.mItemDescription.setHeight(500);
+                        holder.mItemDescription.setGravity(Gravity.CENTER);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            holder.mItemDescription.setTextColor( holder.mItemDescription.getContext().getColor(R.color.white));
+                        }
+                    }else if("GREEN".equals(value)){
+                        holder.mItemDescription.setBackgroundColor(Color.parseColor("#008c51"));
+                        holder.mItemDescription.setHeight(500);
+                        holder.mItemDescription.setGravity(Gravity.CENTER);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            holder.mItemDescription.setTextColor( holder.mItemDescription.getContext().getColor(R.color.white));
+                        }
+                    }else if("BLACK".equals(value)){
+                        holder.mItemDescription.setBackgroundColor(Color.parseColor("#000000"));
+                        holder.mItemDescription.setHeight(500);
+                        holder.mItemDescription.setGravity(Gravity.CENTER);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            holder.mItemDescription.setTextColor( holder.mItemDescription.getContext().getColor(R.color.white));
+                        }
+                    }
+                    else{
+//                        holder.mItemDescription.setBackgroundColor(Color.GREEN);
+                    }
+
+
+                    p.setPost(separated[0]);
+
+                }catch (Exception e){
+                    Log.d("colorCodeAlok01",e.getMessage());
+//    Log.d("colorCodeAlok01",e.);
+                }
+
 
                 holder.mItemDescription.setMovementMethod(LinkMovementMethod.getInstance());
 
                 String textHtml = p.getPost();
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 
                     holder.mItemDescription.setText(mTagSelectingTextview.addClickablePart(Html.fromHtml(textHtml, Html.FROM_HTML_MODE_LEGACY).toString(), this, hashTagHyperLinkDisabled, HASHTAGS_COLOR), TextView.BufferType.SPANNABLE);
 
@@ -1533,14 +1591,18 @@ public class AdvancedItemListAdapter extends RecyclerView.Adapter<AdvancedItemLi
 
                 if (p.getRePostPost().length() != 0) {
 
+
                     holder.mReDescription.setVisibility(View.VISIBLE);
                     holder.mReDescription.setText(p.getRePostPost().replaceAll("<br>", "\n"));
+
+
 
                     holder.mReDescription.setMovementMethod(LinkMovementMethod.getInstance());
 
                     String textHtml = p.getRePostPost();
 
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 
                         holder.mReDescription.setText(mTagSelectingTextview.addClickablePart(Html.fromHtml(textHtml, Html.FROM_HTML_MODE_LEGACY).toString(), this, hashTagHyperLinkDisabled, HASHTAGS_COLOR), TextView.BufferType.SPANNABLE);
 

@@ -531,7 +531,6 @@ public class FeedFragment extends Fragment implements Constants, SwipeRefreshLay
 
 
 
-
                             CustomRequest jsonReq = new CustomRequest(Request.Method.POST, url, null,
                                     new Response.Listener<JSONObject>() {
                                         @Override
@@ -552,6 +551,13 @@ public class FeedFragment extends Fragment implements Constants, SwipeRefreshLay
                                             try {
 
                                                 arrayLength = 0;
+
+
+
+
+
+
+
 
                                                 if (!response.getBoolean("error")) {
 

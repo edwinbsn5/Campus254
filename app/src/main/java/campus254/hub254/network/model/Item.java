@@ -23,7 +23,7 @@ public class Item extends Application implements Constants, Parcelable {
 
     private String urlPreviewTitle, urlPreviewImage, urlPreviewLink, urlPreviewDescription;
 
-    private String previewVideoImgUrl = "", videoUrl = "";
+    private String previewVideoImgUrl = "", videoUrl = "",color="",colorFormate="";
 
     private String rePostTimeAgo, rePostDate, rePostPost, rePostImgUrl, rePostFromUserUsername, rePostFromUserFullname, rePostFromUserPhotoUrl;
     private int fromRePostUserVerify, rePostRemoveAt;

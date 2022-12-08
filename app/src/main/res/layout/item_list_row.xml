@@ -323,13 +323,16 @@
 
                     <LinearLayout
                         android:id="@+id/images_counter_layout"
-                        android:layout_margin="@dimen/spacing_medium"
-                        android:clickable="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:layout_marginBottom="@dimen/spacing_medium"
                         android:background="@color/overlay_dark_40"
+                        android:clickable="true"
                         android:gravity="center_vertical"
                         android:orientation="vertical"
                         android:padding="@dimen/spacing_xmedium">
@@ -344,16 +347,16 @@
                                 android:id="@+id/images_counter_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/white"
-                                android:textStyle="normal"
+                                android:text="+5"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:text="+5"/>
+                                android:textColor="@color/white"
+                                android:textStyle="normal" />
 
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:tint="@color/white"
-                                app:srcCompat="@drawable/ic_camera"/>
+                                app:srcCompat="@drawable/ic_camera" />
 
                         </LinearLayout>
 
@@ -715,18 +718,18 @@
                     </RelativeLayout>
 
                     <github.ankushsachdeva.emojicon.EmojiconTextView
-                        emojicon:emojiconSize="24dp"
-                        android:fontFamily="sans-serif-light"
-                        android:linksClickable="true"
-                        android:autoLink="web"
-                        android:textColorLink="#5BCFF2"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
                         android:id="@+id/reDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:autoLink="web"
+                        android:fontFamily="sans-serif-light"
+                        android:linksClickable="true"
+                        android:padding="@dimen/spacing_middle"
                         android:text="Content"
-                        android:padding="@dimen/spacing_middle" />
+                        android:textColor="@color/black"
+                        android:textColorLink="#5BCFF2"
+                        android:textSize="16dp"
+                        emojicon:emojiconSize="24dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
